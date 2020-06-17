@@ -85,6 +85,8 @@ class _HomeScreenState extends State<HomeScreen>{
     );
   }
 
+  //Construction de la liste des restaurant sur la page d'acceuil
+
   _buildRestaurants(){
 
     double width = MediaQuery.of(context).size.width;
@@ -114,12 +116,15 @@ class _HomeScreenState extends State<HomeScreen>{
               children: <Widget>[
                 new ClipRRect(
                   borderRadius: new BorderRadius.circular(15.0),
-                  child: Image(
-                    height: heigth / 5.5,
-                    width: width / 3.0 ,
-                    image: AssetImage(restaurant.imageUrl),
-                    fit: BoxFit.cover,
-                  ),
+                  child: new Hero(
+                      tag: restaurant.imageUrl,
+                      child: new Image(
+                        height: heigth / 5.5,
+                        width: width / 3.0 ,
+                        image: AssetImage(restaurant.imageUrl),
+                        fit: BoxFit.cover,
+                      ),
+                  )
                 ),
                 new Container(
                   margin: EdgeInsets.symmetric(horizontal: 10.0),
