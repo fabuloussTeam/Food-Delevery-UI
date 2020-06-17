@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/data/data.dart';
 import 'package:flutter_food_delivery_ui/widgets/recent_orders.dart';
 import 'package:flutter_food_delivery_ui/widgets/rating_start.dart';
+import 'restaurant_screen.dart';
 
 class HomeScreen extends StatefulWidget{
    String title = "Food delevier UI";
@@ -90,66 +91,74 @@ class _HomeScreenState extends State<HomeScreen>{
     double heigth = MediaQuery.of(context).size.height;
 
     List<Widget> restaurantList = [];
-    restaurants.forEach((restaurants){
+    restaurants.forEach((restaurant){
       restaurantList.add(
-        new Container(
-          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15.0),
-            border: new Border.all(
-              width: 1.0,
-              color: Colors.grey[200]
-            )
-          ),
-          child: new Row(
-            children: <Widget>[
-              new ClipRRect(
-                borderRadius: new BorderRadius.circular(15.0),
-                child: Image(
-                  height: heigth / 5.5,
-                  width: width / 3.0 ,
-                  image: AssetImage(restaurants.imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              new Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Text(
-                      restaurants.name,
-                      style: new TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    new RatingStarts(restaurants.rating),
-                    new SizedBox(height: 4.0),
-                    new Text(
-                    restaurants.address,
-                    style: new TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600
-                     ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    new SizedBox(height: 4.0),
-                    new Text(
-                      "0.2 miles away",
-                      style: new TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+        new GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => RestaurantScreen(restaurant: restaurant),
               )
-            ],
+          ),
+          child: new  Container(
+            margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15.0),
+                border: new Border.all(
+                    width: 1.0,
+                    color: Colors.grey[200]
+                )
+            ),
+            child: new Row(
+              children: <Widget>[
+                new ClipRRect(
+                  borderRadius: new BorderRadius.circular(15.0),
+                  child: Image(
+                    height: heigth / 5.5,
+                    width: width / 3.0 ,
+                    image: AssetImage(restaurant.imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                new Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      new Text(
+                        restaurant.name,
+                        style: new TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      new RatingStarts(restaurant.rating),
+                      new SizedBox(height: 4.0),
+                      new Text(
+                        restaurant.address,
+                        style: new TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      new SizedBox(height: 4.0),
+                      new Text(
+                        "0.2 miles away",
+                        style: new TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         )
       );
