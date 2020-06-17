@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_food_delivery_ui/data/data.dart';
 import 'package:flutter_food_delivery_ui/widgets/recent_orders.dart';
+import 'package:flutter_food_delivery_ui/widgets/rating_start.dart';
 
 class HomeScreen extends StatefulWidget{
    String title = "Food delevier UI";
@@ -59,10 +61,99 @@ class _HomeScreenState extends State<HomeScreen>{
                 ),
               ),
             ),
-            RecentOrders()
+            RecentOrders(),
+            new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0),
+                    child: new Text(
+                      "Nearby Restaurant",
+                      style: new TextStyle(
+                      letterSpacing: 1.2,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                ),
+                _buildRestaurants(),
+              ]
+            ),
           ],
         )
-         
     );
+  }
+
+  _buildRestaurants(){
+
+    double width = MediaQuery.of(context).size.width;
+    double heigth = MediaQuery.of(context).size.height;
+
+    List<Widget> restaurantList = [];
+    restaurants.forEach((restaurants){
+      restaurantList.add(
+        new Container(
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.0),
+            border: new Border.all(
+              width: 1.0,
+              color: Colors.grey[200]
+            )
+          ),
+          child: new Row(
+            children: <Widget>[
+              new ClipRRect(
+                borderRadius: new BorderRadius.circular(15.0),
+                child: Image(
+                  height: heigth / 5.5,
+                  width: width / 3.0 ,
+                  image: AssetImage(restaurants.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              new Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(
+                      restaurants.name,
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    new RatingStarts(restaurants.rating),
+                    new SizedBox(height: 4.0),
+                    new Text(
+                    restaurants.address,
+                    style: new TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600
+                     ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    new SizedBox(height: 4.0),
+                    new Text(
+                      "0.2 miles away",
+                      style: new TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      );
+    });
+    return new Column(children: restaurantList);
   }
 }
