@@ -18,6 +18,8 @@ class _RestaurantScreenState extends State<RestaurantScreen>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    double heigth = MediaQuery.of(context).size.height;
+
     return new Scaffold(
       body: new Column(
         children: <Widget>[
@@ -27,13 +29,13 @@ class _RestaurantScreenState extends State<RestaurantScreen>{
                 tag: widget.restaurant.imageUrl,
                 child: new Image(
                   image: AssetImage(widget.restaurant.imageUrl),
-                  height: 220.0,
+                  height: heigth / 3.0,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                 ),
               ),
               new Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: heigth / 14),
                 child: new  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
