@@ -78,7 +78,7 @@ class _RestaurantScreenState extends State<RestaurantScreen>{
           ),
           new Positioned(
             bottom: 10.0,
-            right: 5.0,
+            right: 0.0,
             child: new Container(
             margin: EdgeInsets.only(right: 20.0),
             width: 48.00,

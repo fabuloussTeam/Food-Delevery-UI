@@ -100,6 +100,12 @@ class RecentOrders extends StatelessWidget{
         ),
         new Container(
           height: 120.0,
+         /* decoration: new BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+              width: 1,
+            ),
+          ),*/
           // color: Colors.blue,
           child: new ListView.builder(
               physics: new BouncingScrollPhysics(), // pour tirrer l'image en fin ligne

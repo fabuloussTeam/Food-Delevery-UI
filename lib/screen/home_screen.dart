@@ -4,6 +4,7 @@ import 'package:flutter_food_delivery_ui/data/data.dart';
 import 'package:flutter_food_delivery_ui/widgets/recent_orders.dart';
 import 'package:flutter_food_delivery_ui/widgets/rating_start.dart';
 import 'restaurant_screen.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatefulWidget{
    String title = "Food delevier UI";
@@ -32,8 +33,11 @@ class _HomeScreenState extends State<HomeScreen>{
             centerTitle: true,
             actions: <Widget>[
               new FlatButton(
-                  onPressed: (){},
-                  child: new Text(
+                  onPressed: () => Navigator.push(
+                   context,
+                   MaterialPageRoute(builder: (_) => new CartScreen() ),
+                  ),
+                   child: new Text(
                     "Card (${currentUser.cart.length})",
                     style: new TextStyle(color: Colors.white, fontSize: 20.0),
                   )
